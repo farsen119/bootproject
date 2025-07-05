@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammed Farseen KP | Python Full Stack Developer</title>
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --night-blue: #2d545e;
+      --night-blue-shadow: #12343b;
+      --sand-tan: #e1b382;
+      --sand-tan-shadow: #c89666;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      padding-top: 70px; /* To account for fixed navbar */
+    }
+    
+    /* Sticky Navbar */
+    .navbar {
+      background: var(--night-blue);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    
+    .navbar-brand {
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+    
+    .navbar-brand .white-text {
+      color: #ffffff;
+    }
+    
+    .navbar-brand .sand-tan-text {
+      color: var(--sand-tan);
+    }
+    
+    .navbar-brand .bold-text {
+      font-weight: 600;
+    }
+    
+    .navbar-nav .nav-link {
+      font-size: 1.1rem;
+      color: #ffffff;
+      transition: color 0.3s ease;
+      padding: 0.5rem 1rem;
+    }
+    
+    .navbar-nav .nav-link:hover {
+      color: var(--sand-tan);
+    }
+    
+    .navbar-nav .nav-link.active {
+      color: #fff;
+      font-weight: 500;
+    }
+    
+    .nav-link.download-btn {
+      background-color: var(--sand-tan);
+      color: var(--night-blue);
+      padding: 8px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-left: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link.download-btn:hover {
+      background-color: var(--night-blue);
+      color: var(--sand-tan);
+      box-shadow: 0 0 0 2px var(--sand-tan);
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--night-blue-shadow) 0%, var(--night-blue) 100%);
+      color: white;
+      padding: 120px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(225,179,130,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"></path></svg>');
+      background-size: cover;
+      background-position: bottom;
+      background-repeat: no-repeat;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 30px;
+      color: var(--sand-tan);
+    }
+    
+    .hero-text {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+    
+    /* About Section */
+    .about {
+      padding: 100px 0;
+      background-color: white;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 50px;
+      color: var(--night-blue);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background-color: var(--sand-tan);
+    }
+    
+    .about-img {
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      max-width: 100%;
+      height: auto;
+      border: 5px solid var(--sand-tan);
+    }
+    
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+    
+    /* Skills Section */
+    .skills {
+      padding: 100px 0;
+      background-color: #f8f9fa;
+    }
+    
+    .skill-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      border-top: 4px solid var(--sand-tan);
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .skill-icon {
+      font-size: 2.5rem;
+      color: var(--sand-tan);
+      margin-bottom: 20px;
+    }
+    
+    .skill-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--night-blue);
+    }
+    
+    /* Contact Section */
+    .contact {
+      padding: 100px 0;
+      background-color: white;
+    }
+    
+    .contact-info {
+      margin-bottom: 30px;
+    }
+    
+    .contact-icon {
+      color: var(--sand-tan);
+      font-size: 1.5rem;
+      margin-right: 15px;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: var(--night-blue);
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    .social-icons {
+      margin-bottom: 20px;
+    }
+    
+    .social-icon {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      color: var(--sand-tan);
+    }
+    
+    /* Buttons */
+    .btn-primary-custom {
+      background-color: var(--sand-tan);
+      color: var(--night-blue);
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary-custom:hover {
+      background-color: var(--night-blue);
+      color: var(--sand-tan);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(194, 152, 102, 0.3);
+    }
+    
+    .btn-outline-custom {
+      background-color: transparent;
+      color: var(--sand-tan);
+      border: 2px solid var(--sand-tan);
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      margin-left: 15px;
+    }
+    
+    .btn-outline-custom:hover {
+      background-color: var(--sand-tan);
+      color: var(--night-blue);
+    }
+    
+    /* Animation */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    /* Form Styling */
+    .form-control {
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--sand-tan);
+      box-shadow: 0 0 0 0.25rem rgba(225, 179, 130, 0.25);
+    }
+
+    .projects {
+      padding: 100px 0;
+      background-color: white;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 50px;
+      color: var(--night-blue);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background-color: var(--sand-tan);
+    }
+    
+    .project-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+      border-top: 4px solid var(--sand-tan);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .project-content {
+      padding: 25px;
+    }
+    
+    .project-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--night-blue);
+    }
+    
+    .project-description {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .tech-badge {
+      background-color: var(--sand-tan);
+      color: var(--night-blue);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--night-blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .project-link:hover {
+      color: var(--sand-tan);
+    }
+    
+    .project-link i {
+      margin-right: 8px;
+    }
+    
+    /* Filter Buttons */
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .filter-btn {
+      background: transparent;
+      color: var(--night-blue);
+      border: 2px solid var(--sand-tan);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--sand-tan);
+      color: var(--night-blue);
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <span class="white-text">FARS</span><span class="sand-tan-text bold-text">EEN KP</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#projects">
+              Projects
+            </a>
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link download-btn" href="cv.pdf" download aria-label="Download CV">
+              Download CV
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 hero-content">
+          <h1 class="hero-title">Muhammed Farseen KP</h1>
+          <h2 class="hero-subtitle">Python Full Stack Developer</h2>
+          <p class="hero-text">I build robust, scalable web applications using Python and modern JavaScript frameworks. Passionate about creating efficient solutions and delivering exceptional user experiences.</p>
+          <div class="d-flex flex-wrap">
+            <a href="#contact" class="btn btn-primary-custom mb-2 mb-md-0">Hire Me</a>
+            <a href="#projects" class="btn btn-outline-custom">View Projects</a>
+          </div>
+        </div>
+        <div class="col-lg-6 d-none d-lg-block text-center">
+          <img src="newone.png" alt="Muhammed Farseen KP" class="img-fluid floating" style="border-radius: 50%; border: 5px solid var(--sand-tan); max-width: 400px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="row align-items-center">
+        <div class="col-lg-5 mb-5 mb-lg-0">
+          <img src="newone.png" alt="About Muhammed Farseen KP" class="about-img">
+        </div>
+        <div class="col-lg-7">
+          <p class="about-text">Hello! I'm Muhammed Farseen KP, an ambitious and enthusiastic B.Tech Computer Science student from Kerala, India, currently pursuing a Python Full Stack Development course and gaining hands-on experience through an internship.</p>
+          <p class="about-text">I'm skilled in Python programming, web development frameworks like Django and Flask, and database management with SQL. My internship is helping me apply these skills in real-world projects, and I'm eager to build innovative, user-friendly applications that solve real problems.</p>
+          <p class="about-text">When I'm not coding, you can find me contributing to open-source projects, learning new technologies, or sharing knowledge with the developer community.</p>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li class="mb-2"><strong>Name:</strong> Muhammed Farseen KP</li>
+                <li class="mb-2"><strong>Email:</strong>muhammedfarseen109@gmail.com</li>
+                <li class="mb-2"><strong>Phone:</strong> +91 852081140</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li class="mb-2"><strong>From:</strong> Kerala, India</li>
+                <li class="mb-2"><strong>Experience:</strong> Intern (Fresher)</li>
+                <li class="mb-2"><strong>Freelance:</strong> Available</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <div class="container">
+      <h2 class="section-title text-center">My Skills</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fab fa-python"></i>
+            </div>
+            <h3 class="skill-title">Python Development</h3>
+            <p>Expertise in Django, Flask, FastAPI for building robust backend systems and RESTful APIs.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="skill-title">Database Management</h3>
+            <p>MySQL, MongoDB with efficient data modeling and query optimization.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fab fa-js"></i>
+            </div>
+            <h3 class="skill-title">JavaScript Frameworks</h3>
+            <p>React.js building interactive, responsive frontend applications.</p>
+          </div>
+        </div>
+        <!-- <div class="col-md-4 mb-4">
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3 class="skill-title">DevOps & Deployment</h3>
+            <p>Docker, AWS, CI/CD pipelines for seamless deployment and scaling.</p>
+          </div>
+        </div> -->
+        <div class="col-md-4 mb-4">
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3 class="skill-title">Responsive Design</h3>
+            <p>Bootstrap, Tailwind CSS for creating mobile-first, accessible interfaces.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-code-branch"></i>
+            </div>
+            <h3 class="skill-title">Version Control</h3>
+            <p>Git, GitHub for collaborative development and code management.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2 class="section-title text-center">My Projects</h2>
+      
+      <!-- Filter Buttons -->
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="python">Python</button>
+        <button class="filter-btn" data-filter="django">Django</button>
+        <button class="filter-btn" data-filter="javascript">JavaScript</button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        <button class="filter-btn" data-filter="ai">AI</button>
+        <button class="filter-btn" data-filter="ml">ML</button>
+      </div>
+      
+      <div class="row">
+        <!-- Project 1 -->
+        <div class="col-lg-4 col-md-6" data-category="ai,ml">
+          <div class="project-card">
+            <img src="newone.png" alt="E-Commerce Platform" class="project-img">
+            <div class="project-content">
+              <h3 class="project-title">AI-Enhanced Unmanned Aerial Vehicles for Search and Rescue Operations</h3>
+              <p class="project-description">Developed an AI-powered UAV system with real-time ML for autonomous SAR operations, enabling precise target detection, efficient navigation, and secure data handling.</p>
+              <div class="project-tech">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">ML</span>
+                <span class="tech-badge">SQL</span>
+                <span class="tech-badge">AI</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="col-lg-4 col-md-6" data-category="python,javascript">
+          <div class="project-card">
+            <img src="newone.png" alt="Task Management App" class="project-img">
+            <div class="project-content">
+              <h3 class="project-title">Task Management App</h3>
+              <p class="project-description">A collaborative task management application with real-time updates using FastAPI and Vue.js.</p>
+              <div class="project-tech">
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">Vue.js</span>
+                <span class="tech-badge">WebSockets</span>
+                <span class="tech-badge">MongoDB</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="col-lg-4 col-md-6" data-category="fullstack,javascript">
+          <div class="project-card">
+            <img src="newone.png" alt="Portfolio Website" class="project-img">
+            <div class="project-content">
+              <h3 class="project-title">Portfolio Website</h3>
+              <p class="project-description">A responsive portfolio website built with modern frontend technologies to showcase professional work.</p>
+              <div class="project-tech">
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Bootstrap</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 4 -->
+        <div class="col-lg-4 col-md-6" data-category="python,django">
+          <div class="project-card">
+            <img src="https://via.placeholder.com/600x400/2d545e/e1b382?text=Blog+Platform" alt="Blog Platform" class="project-img">
+            <div class="project-content">
+              <h3 class="project-title">Blog Platform</h3>
+              <p class="project-description">A content management system for bloggers with rich text editing and user authentication.</p>
+              <div class="project-tech">
+                <span class="tech-badge">Django</span>
+                <span class="tech-badge">Django REST</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">AWS</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 5 -->
+        <div class="col-lg-4 col-md-6" data-category="javascript,fullstack">
+          <div class="project-card">
+            <img src="https://via.placeholder.com/600x400/2d545e/e1b382?text=Weather+App" alt="Weather Application" class="project-img">
+            <div class="project-content">
+              <h3 class="project-title">Weather Application</h3>
+              <p class="project-description">Built a responsive Weather Application using React, HTML, CSS, and Bootstrap, integrating real-time weather data through a public API.</p>
+              <div class="project-tech">
+                <span class="tech-badge">React</span>
+                <span class="tech-badge">API Integration</span>
+                <span class="tech-badge">Geolocation</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 6 -->
+        <div class="col-lg-4 col-md-6" data-category="python,fullstack">
+          <div class="project-card">
+            <img src="https://via.placeholder.com/600x400/2d545e/e1b382?text=CRM+System" alt="CRM System" class="project-img">
+            <div class="project-content">
+              <h3 class="project-title">Hospital Management System</h3>
+              <p class="project-description">Developed a Hospital Management System using Django, HTML, CSS, and Bootstrap to manage patients, appointments, and staff efficiently.</p>
+              <div class="project-tech">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Django</span>
+                <span class="tech-badge">SQL</span>
+                <span class="tech-badge">JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title text-center">Get In Touch</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <input type="text" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6 mb-4">
+                <input type="email" class="form-control" placeholder="Your Email" required>
+              </div>
+            </div>
+            <div class="mb-4">
+              <input type="text" class="form-control" placeholder="Subject">
+            </div>
+            <div class="mb-4">
+              <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary-custom">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-4 text-center mb-4">
+          <div class="contact-info">
+            <i class="fas fa-map-marker-alt contact-icon"></i>
+            <p>Kerala, India</p>
+          </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+          <div class="contact-info">
+            <i class="fas fa-envelope contact-icon"></i>
+            <p>muhammedfarseen109@gmail.com</p>
+          </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+          <div class="contact-info">
+            <i class="fas fa-phone-alt contact-icon"></i>
+            <p>+91 8592081140</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="social-icons">
+        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>&copy; 2025 Muhammed Farseen KP. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectItems = document.querySelectorAll('.col-lg-4');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Set active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          const filterValue = button.getAttribute('data-filter');
+          
+          projectItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category').includes(filterValue)) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
